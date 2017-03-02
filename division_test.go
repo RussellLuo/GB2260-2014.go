@@ -7,8 +7,6 @@ import (
 
 func Test_DivisionCountry(t *testing.T) {
 	// 110101 北京市/市辖区/东城区
-	gb := NewGB2260("")
-
 	division := gb.Get("110101")
 	if division == nil {
 		t.Error("division not exist")
@@ -40,7 +38,6 @@ func Test_DivisionCountry(t *testing.T) {
 
 func Test_DivisionPrefecture(t *testing.T) {
 	// 110100 北京市/市辖区
-	gb := NewGB2260("")
 	division := gb.Get("110100")
 	if division == nil {
 		t.Error("division not exist")
@@ -73,7 +70,6 @@ func Test_DivisionPrefecture(t *testing.T) {
 
 func Test_DivisionProvince(t *testing.T) {
 	// 110000 北京市
-	gb := NewGB2260("")
 	division := gb.Get("110000")
 	if division == nil {
 		t.Error("division not exist")
@@ -105,7 +101,6 @@ func Test_DivisionProvince(t *testing.T) {
 
 func Test_Compare(t *testing.T) {
 	div := Division{Code: "110101", Name: "东城区", Revision: "2014"}
-	gb := NewGB2260("")
 
 	p := gb.Get("110101")
 	if p == nil {
@@ -128,7 +123,6 @@ func Test_Compare(t *testing.T) {
 }
 
 func Test_Provinces(t *testing.T) {
-	gb := NewGB2260("")
 	p := gb.Provinces()
 	if p == nil {
 		t.Error("provinces is nil")
@@ -140,8 +134,6 @@ func Test_Provinces(t *testing.T) {
 }
 
 func Test_Prefectures(t *testing.T) {
-	gb := NewGB2260("")
-
 	prefectures := gb.Prefectures("110101")
 	if prefectures == nil {
 		t.Error("prefectures is nil")
@@ -153,8 +145,6 @@ func Test_Prefectures(t *testing.T) {
 }
 
 func Test_Counties(t *testing.T) {
-	gb := NewGB2260("")
-
 	countries := gb.Counties("110101")
 	if countries == nil {
 		t.Error("prefectures is nil")

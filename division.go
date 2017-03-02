@@ -4,6 +4,12 @@ import (
 	"fmt"
 	"regexp"
 	"strings"
+
+	. "github.com/RussellLuo/GB2260-2014.go/data"
+)
+
+const (
+	revision = "2014"
 )
 
 // GB2260 GB2260
@@ -12,26 +18,20 @@ type GB2260 struct {
 	Revision string
 }
 
-var (
-	_LatestYear = "2014"
-)
+var gb = GB2260{
+	Store:    Divisions[revision],
+	Revision: revision,
+}
 
-// NewGB2260 If revision is not specified, use the latest data.
-func NewGB2260(revision string) GB2260 {
-	if revision == "" {
-		revision = _LatestYear
-	}
-
-	return GB2260{
-		Store:    divisions[revision],
-		Revision: revision,
-	}
+// Get is a shortcut of GB2260.Get
+func Get(code string) *Division {
+	return gb.Get(code)
 }
 
 func Revisions() []string {
 	var revisions []string
 
-	for revision, _ := range divisions {
+	for revision, _ := range Divisions {
 		revisions = append(revisions, revision)
 	}
 
@@ -51,19 +51,6 @@ func (g GB2260) Get(code string) *Division {
 		Revision: g.Revision,
 		gb:       g,
 	}
-}
-
-// Search Division
-func Search(code string, revisions []string) *Division {
-	for _, revision := range revisions {
-		gb := NewGB2260(revision)
-		division := gb.Get(code)
-		if division != nil {
-			return division
-		}
-	}
-
-	return nil
 }
 
 // Provinces Return a list of provinces in Division data structure.
